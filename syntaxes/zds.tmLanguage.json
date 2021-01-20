@@ -1,0 +1,60 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Dlg Script",
+    "patterns": [
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#strings"
+        },
+        { "include": "#statement" },
+        { "include": "python" },
+        { "include": "#expression" }
+    ],
+    "repository": {
+        "statement": {
+            "match": "^ *(\\blabel\\b|\\bsay\\b|\\bpython\\b|\\boption\\b|(?<!\\w)@|\\b-\\b|\\b->\\b|\\b$\\b|\\b[\\*]\\b)",
+            "name": "entity.name.function",
+            "patterns": [
+                { "include": "#label" },
+                { "include": "#line" },
+                { "include": "#goto" },
+                { "include": "source.python" },
+                { "include": "#option" }
+            ]
+        },
+        "expression": {
+            "begin": "{",
+            "end": "}",
+            "patterns": [{ "name": "constant.character.escape", "match": "\\." }],
+            "contentName": "meta.embedded.block.python"
+        },
+        "goto": {
+            "match": "(goto +|-> *)([_a-zA-Z]+[_a-zA-Z0-9]*)",
+            "captures": {
+                "0": { "name": "entity.name.function.goto" }
+            }
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control.zds",
+                    "match": "\\b(if|while|for|return)\\b"
+                }
+            ]
+        },
+        "strings": {
+            "name": "string.quoted.double.zds",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.zds",
+                    "match": "\\\\."
+                }
+            ]
+        }
+    },
+    "scopeName": "source.zds"
+}

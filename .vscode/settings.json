@@ -1,0 +1,14 @@
+{
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "name": "Label",
+                "scope": [ "source.zds.label" ],
+                "settings": {
+                    "foreground": "#ff1010",
+                    "fontStyle": "bold"
+                }
+            },
+        ]
+    }
+}
